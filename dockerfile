@@ -14,5 +14,10 @@ EXPOSE 8080
 EXPOSE 8081
 
 COPY --from=build-env /app/out .
-
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+ENV DD_SERVICE=joey-aas-container-dotnet
+ENV DD_ENV=dev
+ENV DD_VERSION=1
+ENTRYPOINT ["/app/datadog-init"]
 CMD ["dotnet", "MyFirstAzureWebApp.dll"]
