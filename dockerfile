@@ -14,7 +14,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 COPY --from=build-env /app/out .
-COPY --from=joeyzhao2018/test-serverless-init:v1 /datadog-init /app/datadog-init
+COPY --from=joeyzhao2018/test-serverless-init:v2 /datadog-init /app/datadog-init
 COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
 ENV DD_SERVICE=joey-aas-container-dotnet
 ENV DD_ENV=dev
