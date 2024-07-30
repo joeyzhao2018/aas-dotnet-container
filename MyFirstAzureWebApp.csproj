@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DogStatsD-CSharp-Client" Version="8.0.0" />
+<!--    <PackageReference Include="StatsdClient" Version="2.0.68" />-->
+  </ItemGroup>
+
 </Project>

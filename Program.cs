@@ -1,3 +1,4 @@
+using StatsdClient;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +16,16 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.MapGet("/timer", () =>
+{
+    using (DogStatsd.StartTimer("joey.timer", tags: new[] { "user:joey" }))
+    {
+        Thread.Sleep(1000);
+        Console.WriteLine("Hi, joey timer");
+    }
+    return "Hi, timer";
+});
 
 app.UseRouting();
 
