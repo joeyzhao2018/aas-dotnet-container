@@ -22,7 +22,7 @@ app.MapGet("/timer", () =>
     using (DogStatsd.StartTimer("joey.timer", tags: new[] { "user:joey" }))
     {
         Thread.Sleep(1000);
-        Console.WriteLine("Hi, joey timer");
+        Console.WriteLine("Hi, joey timer 1.2.1");
     }
     return "Hi, timer";
 });
