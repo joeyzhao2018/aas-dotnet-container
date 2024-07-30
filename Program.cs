@@ -24,7 +24,7 @@ app.MapGet("/timer", () =>
         Thread.Sleep(1000);
         Console.WriteLine("Hi, joey timer 1.2.1");
     }
-    return "Hi, timer";
+    return "Hi, timer 1.2.1";
 });
 
 app.UseRouting();
