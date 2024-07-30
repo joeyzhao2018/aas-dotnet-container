@@ -19,12 +19,28 @@ app.UseStaticFiles();
 
 app.MapGet("/timer", () =>
 {
-    using (DogStatsd.StartTimer("joey.timer", tags: new[] { "user:joey" }))
+    var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+    using (var dogStatsdService = new DogStatsdService())
     {
-        Thread.Sleep(1000);
-        Console.WriteLine("Hi, joey timer 1.2.1");
+        if (!dogStatsdService.Configure(dogstatsdConfig))
+            throw new InvalidOperationException(
+                "Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
+        dogStatsdService.Increment("joey.increment", tags: new[] {"user:joey"});
+
+        using (dogStatsdService.StartTimer("joey.timer", tags: new[] { "user:joey" }))
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine("Hi, joey timer 1.2.1");
+        }
     }
-    return "Hi, timer 1.2.1";
+
+
+    return "Hi, timer configured";
 });
 
 app.UseRouting();
