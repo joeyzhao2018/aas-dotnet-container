@@ -30,9 +30,9 @@ app.MapGet("/timer", () =>
         if (!dogStatsdService.Configure(dogstatsdConfig))
             throw new InvalidOperationException(
                 "Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
-        dogStatsdService.Increment("joey.increment", tags: new[] {"user:joey"});
+        dogStatsdService.Increment("joey.increment", tags: new[] {"user:latest"});
 
-        using (dogStatsdService.StartTimer("joey.timer", tags: new[] { "user:joey" }))
+        using (dogStatsdService.StartTimer("joey.timer", tags: new[] { "user:latest" }))
         {
             Thread.Sleep(1000);
             Console.WriteLine("Hi, joey timer 1.2.1");
@@ -40,7 +40,7 @@ app.MapGet("/timer", () =>
     }
 
 
-    return "Hi, timer configured";
+    return "Hi, latest";
 });
 
 app.UseRouting();
