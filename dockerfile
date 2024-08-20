@@ -18,7 +18,7 @@ COPY --from=build-env /app/out .
 COPY --from=ghcr.io/datadog/datadog-lambda-extension/serverless-init:1.2.8-rc0 / /app/
 # COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 # COPY ./dotnet.sh .
-RUN chmod u+x dotnet.sh && ./dotnet.sh
+# RUN chmod u+x dotnet.sh && ./dotnet.sh
 # COPY --from=ghcr.io/datadog/dd-trace-dotnet/dd-lib-dotnet-init:cf2c5942f74f22306fa2178390848f568c4bdf3a /datadog-init/monitoring-home/ /dd_tracer/dotnet/
 # COPY --from=joeyzhao2018/test-serverless-init:v2 /datadog-init /app/datadog-init
 # COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
