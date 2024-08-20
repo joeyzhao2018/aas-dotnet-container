@@ -14,7 +14,8 @@ EXPOSE 8080
 EXPOSE 8081
 
 COPY --from=build-env /app/out .
-COPY --from=datadog/serverless-init:1 / /app/
+
+COPY --from=ghcr.io/datadog/datadog-lambda-extension/serverless-init:1.2.8-rc0 / /app/
 # COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 # COPY ./dotnet.sh .
 RUN chmod u+x dotnet.sh && ./dotnet.sh
